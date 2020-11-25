@@ -1,0 +1,40 @@
+.wrap{
+	display: flex;
+	justify-content: center;
+}
+.black, .header, .mark-table tr td:first-child, .black-row td{
+	color: #fff;
+	background-color: #000;
+}
+.header{
+	width:100%;
+	margin-bottom:5px;
+}
+.w3-table td{
+	vertical-align: middle;
+}
+#marks-table{
+    width:810px;
+    overflow: auto;
+    border: #ddd solid 1px;
+}
+.mark-table tr td:first-child{
+    min-width: 250px;
+	position: sticky;
+	left: 0px;
+	border-bottom: #ddd solid 1px;
+	background-clip:padding-box;
+}
+.mark-table tr:last-child{
+    border: none;
+}
+.mark-table tr:last-child td{
+    border-bottom: none;
+}
+.mark-table tr:first-child td{
+    border-top: none;
+}
+.mark-table td{
+    min-width: 40px;
+    border: #ddd solid 1px;
+}
