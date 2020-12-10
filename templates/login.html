@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+{% block title %}Вхід{% endblock %}
+{% block content %}
+    <center>
+        <form method=POST action="/login" class='w3-container w3-card w3-padding w3-margin' style='width:300px;'>
+        <label>Лоґін</label>
+        <input name='login' type='text' placeholder='Лоґін' class='w3-input'>
+        <label>Пароль</label>
+        <input name='pass' type='password' placeholder='Пароль' class='w3-input'>
+        <button class='w3-btn w3-black w3-block w3-margin-top' type='submit'>Увійти</button>
+        </form>
+    </center>
+{% endblock %}
