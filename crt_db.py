@@ -31,10 +31,15 @@ ALTER TABLE `dovidnyuk_students`
 CHANGE `password`
 `password` VARCHAR(64) NOT NULL;
     '''
+
+    print("Starting...")
     cursor.execute(sql_for_session)
     db.commit()
+    print("Session was added")
     cursor.execute(sql_for_fk)
     db.commit()
+    print("FK for session was added")
     cursor.execute(sql_for_pass_expand)
     db.commit()
+    print("Pass was expanded")
     db.close()
