@@ -26,8 +26,15 @@ REFERENCES `dovidnyuk_students`(`id_student`)
 ON DELETE CASCADE ON UPDATE CASCADE;
     '''
 
+    sql_for_pass_expand = '''
+ALTER TABLE `dovidnyuk_students`
+CHANGE `password`
+`password` VARCHAR(64) NOT NULL;
+    '''
     cursor.execute(sql_for_session)
     db.commit()
     cursor.execute(sql_for_fk)
+    db.commit()
+    cursor.execute(sql_for_pass_expand)
     db.commit()
     db.close()
