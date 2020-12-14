@@ -2,7 +2,7 @@
 
 from flask import Flask, render_template, request, redirect, make_response
 from gevent.pywsgi import WSGIServer
-from hashlib import sha3_256 as sha3
+from sha3 import sha3_256
 import mysql.connector
 import db_config
 
@@ -11,7 +11,7 @@ db = mysql.connector.connect(**db_config.db)
 
 
 def hash(text):
-	return sha3(str(text).encode('utf-8')).hexdigest()
+	return sha3_256(str(text).encode('utf-8')).hexdigest()
 
 
 def acc(func):

@@ -32,6 +32,10 @@ CHANGE `password`
 `password` VARCHAR(64) NOT NULL;
     '''
 
+    sql_for_pass_not_uq = '''
+ALTER TABLE `dovidnyuk_students` DROP INDEX `password_UNIQUE`;
+    '''
+
     print("Starting...")
     cursor.execute(sql_for_session)
     db.commit()
@@ -42,4 +46,7 @@ CHANGE `password`
     cursor.execute(sql_for_pass_expand)
     db.commit()
     print("Pass was expanded")
+    cursor.execute(sql_for_pass_not_uq)
+    db.commit()
+    print("Pass was made not unique")
     db.close()
