@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from flask import Flask, render_template, request, redirect, make_response
 from gevent.pywsgi import WSGIServer
 from hashlib import sha3_256 as sha3
