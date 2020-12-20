@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+{% block title %}Оцінки{% endblock %}
+{% block content %}
+	<center>
+        <dl>
+          {% for el in lessons %}
+          <dd><a href="/mark/{{ el[0] }}"><div class="w3-button black less-btn">{{ el[1] }}</div></a></dd>
+          {% endfor %}
+        </dl>
+	</center>
+{% endblock %}

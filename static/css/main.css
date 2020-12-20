@@ -38,3 +38,7 @@
     min-width: 40px;
     border: #ddd solid 1px;
 }
+.less-btn{
+	width: 300px;
+	margin: 5px 0px;
+}

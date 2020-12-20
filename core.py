@@ -92,28 +92,23 @@ def mark(student_id):
 	db.commit()  # Magic commit, without it server got old data from DB. IDK why :)
 	cur.execute('select FK_discipline, discipline_name from v_stundent_lesson where id_student=%s;', (student_id,))
 	lessons = cur.fetchall()
-	marks = []
 
-	for el in lessons:
-		cur.execute('select digital_name from v_students_mark where FK_discipline=%s and id_student=%s\
-			order by PK_student_mark;', (el[0], student_id))
-		marks.append((el[0], el[1], cur.fetchall()))
-
-	return render_template('all_mark.html', marks=marks)
+	return render_template('lesson_list.html', lessons=lessons)
 
 
 @app.route('/mark/<int:id>')
 @acc
 def detail_mark(id, session):
-	cur = db.cursor()
+	cur = db.cursor(buffered=True)
 	db.commit()  # Magic commit, without it server got old data from DB. IDK why :)
 	cur.execute('''select digital_name, compact_name_vudy, date
 from v_students_mark
 where id_student=%s and FK_discipline=%s
 order by PK_student_mark;''', (session[1], id))
 	marks = cur.fetchall()
-
-	return render_template('mark.html', marks=marks)
+	cur.execute('select discipline_name from v_stundent_lesson where FK_discipline=%s;', (id,))
+	name = cur.fetchone()[0]
+	return render_template('mark.html', marks=marks, name=name)
 
 
 if __name__ == '__main__':
