@@ -36,7 +36,8 @@ CREATE VIEW `v_students_mark` AS
         `dovidnyuk_marks`.`digital_name` AS `digital_name`,
         `dovidnyuk_group_load`.`FK_discipline` AS `FK_discipline`,
         `dovidnyuk_zaniat`.`tema_zaniattya` AS `tema_zaniattya`,
-        `dovidnyuk_vudiv_zaniat`.`compact_name_vudy` AS `compact_name_vudy`
+        `dovidnyuk_vudiv_zaniat`.`compact_name_vudy` AS `compact_name_vudy`,
+        `dovidnyuk_zaniat`.`date` AS `date`
     FROM
         (((((`dovidnyuk_student_marks`
         LEFT JOIN `dovidnyuk_marks` ON ((`dovidnyuk_student_marks`.`FK_mark` = `dovidnyuk_marks`.`PK_mark`)))
@@ -58,7 +59,7 @@ CREATE VIEW `v_stundent_lesson` AS
 
     msg_arr = ["Session was added", "FK for session was added",
     "Pass was expanded", "Pass was made not unique",
-    "View 0 created", "View 1 created"]
+    "View 0 created", "View 1 created""]
 
     print("Starting...")
 

@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+{% block title %}Оцінки{% endblock %}
+{% block content %}
+	<center>
+        <div id="marks-table">
+            <table class="w3-table w3-bordered w3-centered mark-table">
+              <tr class="w3-black">
+                {% for el in marks%}
+                  <td>{{ el[2] }}<br>{{ el[1] }}</td>
+                {% endfor %}
+              </tr>
+              <tr>
+                {% for el in marks%}
+                  <td>{{ el[0] }}</td>
+                {% endfor %}
+              </tr>
+            </table>
+        </div>
+	</center>
+{% endblock %}

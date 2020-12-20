@@ -31,6 +31,7 @@ def acc(func):
 @app.route('/')
 def index():
 	cur = db.cursor(buffered=True)
+	db.commit()  # Magic commit, without it server got old data from DB. IDK why :)
 	auth = request.cookies.get('auth', None)
 	auth_id = request.cookies.get('auth_id', None)
 	if auth and auth_id:
@@ -55,6 +56,7 @@ def login():
 		login = request.form['login']
 
 		cur = db.cursor(buffered=True)
+		db.commit()  # Magic commit, without it server got old data from DB. IDK why :)
 		cur.execute('select password from `dovidnyuk_students` where id_student=%s;', (login,))
 		if password == cur.fetchone()[0]:
 			ip = request.remote_addr
@@ -85,7 +87,6 @@ def _exit(session):
 	return resp
 
 
-@app.route('/mark/<int:student_id>')
 def mark(student_id):
 	cur = db.cursor()
 	db.commit()  # Magic commit, without it server got old data from DB. IDK why :)
@@ -96,12 +97,26 @@ def mark(student_id):
 	for el in lessons:
 		cur.execute('select digital_name from v_students_mark where FK_discipline=%s and id_student=%s\
 			order by PK_student_mark;', (el[0], student_id))
-		marks.append((el[1], cur.fetchall()))
+		marks.append((el[0], el[1], cur.fetchall()))
 
 	return render_template('all_mark.html', marks=marks)
 
 
+@app.route('/mark/<int:id>')
+@acc
+def detail_mark(id, session):
+	cur = db.cursor()
+	db.commit()  # Magic commit, without it server got old data from DB. IDK why :)
+	cur.execute('''select digital_name, compact_name_vudy, date
+from v_students_mark
+where id_student=%s and FK_discipline=%s
+order by PK_student_mark;''', (session[1], id))
+	marks = cur.fetchall()
+
+	return render_template('mark.html', marks=marks)
+
+
 if __name__ == '__main__':
-	#app.run(port=80, debug=True)
-	http_server = WSGIServer(('127.0.0.1', 80), app)
-	http_server.serve_forever()
+	app.run(port=80, debug=True)
+	# http_server = WSGIServer(('127.0.0.1', 80), app)
+	# http_server.serve_forever()

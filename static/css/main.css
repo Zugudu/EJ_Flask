@@ -2,7 +2,7 @@
 	display: flex;
 	justify-content: center;
 }
-.black, .header, .mark-table tr td:first-child, .black-row td{
+.black, .header, .mark-table-first tr td:first-child, .black-row td{
 	color: #fff;
 	background-color: #000;
 }
@@ -18,8 +18,8 @@
     overflow: auto;
     border: #ddd solid 1px;
 }
-.mark-table tr td:first-child{
-    min-width: 250px;
+.mark-table-first tr td:first-child{
+  min-width: 250px;
 	position: sticky;
 	left: 0px;
 	border-bottom: #ddd solid 1px;
